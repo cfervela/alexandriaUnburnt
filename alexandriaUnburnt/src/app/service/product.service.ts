@@ -23,12 +23,12 @@ export class ProductService {
   }
 
   // UPDATE EXISTING PRODUCT
-  updateProduct(id: number, product: Product): Observable<Product>{
-    return this.http.put<Product>(`${this.apiURL}/${id}`, product);
+  updateProduct(isbn: string, product: Product): Observable<Product>{
+    return this.http.put<Product>(`${this.apiURL}/${isbn}`, product);
   }
 
   // DELETE EXISTING PRODUCT
-  deleteProduct (id: number): Observable<any>{
-    return this.http.delete(`${this.apiURL}/${id}`);
+  deleteProduct (isbn: string): Observable<any>{
+    return this.http.delete(`${this.apiURL}/${isbn}`);
   }
 }

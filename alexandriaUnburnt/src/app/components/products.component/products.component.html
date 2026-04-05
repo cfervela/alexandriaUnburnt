@@ -18,7 +18,7 @@
       <div class="book-info">
         <h3 class="book-title">{{ p.title }}</h3>
         <p class="book-author">{{ p.author }}</p>
-        <span class="book-genre">{{ p.genre }}</span>
+        <span class="book-genre" [class]="'book-genre ' + getGenreClass(p.genre)">{{ p.genre }}</span>
         <p class="book-description">{{ p.description }}</p>
         <div class="book-meta">
           <span class="book-price">${{ p.price }}</span>
@@ -31,7 +31,7 @@
           <button class="btn-info" (click)="edit(p)">
             <i class="bi bi-zoom-in"></i> Info
           </button>
-          <button class="btn-delete" (click)="deleteProduct(p.id!)">
+          <button class="btn-delete" (click)="deleteProduct(p.isbn!)">
             <i class="bi bi-trash"></i> Delete
           </button>
         </div>
@@ -59,6 +59,9 @@
         <div class="modal-body">
           <div class="row g-3">
             <div class="col-md-6">
+              <input type="text" class="form-control" [(ngModel)]="product.isbn" name="isbn" placeholder="Book ISBN" required/>
+            </div>
+            <div class="col-md-6">
               <input type="text" class="form-control" [(ngModel)]="product.title" name="title" placeholder="Book Title" required/>
             </div>
             <div class="col-md-6">
@@ -75,9 +78,6 @@
             </div>
             <div class="col-md-6">
               <input type="number" class="form-control" [(ngModel)]="product.stock" name="stock" placeholder="Stock" required/>
-            </div>
-            <div class="col-12">
-              <input type="text" class="form-control" [(ngModel)]="product.image" name="image" placeholder="Image URL" />
             </div>
             <div class="col-12">
               <textarea class="form-control" [(ngModel)]="product.description" name="description" placeholder="Synopsis" rows="3"></textarea>

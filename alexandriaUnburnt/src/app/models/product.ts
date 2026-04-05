@@ -1,5 +1,5 @@
 export class Product {
-  id?: number = 0;
+  isbn: string = "";
   title: string = "";
   author: string = "";
   genre: string = "";
