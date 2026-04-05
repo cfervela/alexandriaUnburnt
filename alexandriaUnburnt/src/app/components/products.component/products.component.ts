@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../service/product.service';
@@ -13,10 +13,11 @@ import { Product } from '../../models/product';
 })
 export class ProductsComponent implements OnInit {
 
-  products: Product[] = [];
+  products = signal<Product[]>([]);
   product: Product = { title: '', author: '', genre: '', publisher: '', price: 0, stock: 0, image: '', description: '' };
   editing: boolean = false;
   idEditing: number | undefined = undefined;
+  showModal: boolean = false;
 
   constructor(private productService: ProductService) {}
 
@@ -24,13 +25,19 @@ export class ProductsComponent implements OnInit {
     this.getProducts();
   }
 
+  openModal(): void {
+    this.showModal = true;
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    this.resetProductForm();
+  }
+
   // LOAD PRODUCTS
   getProducts(): void {
     this.productService.getProducts().subscribe({
-      next: data => {
-        console.log('Products received:', data);
-        this.products = data;
-      },
+      next: data => this.products.set(data),
       error: err => console.error('Error:', err)
     });
   }
@@ -38,16 +45,14 @@ export class ProductsComponent implements OnInit {
   // UPDATE OR CREATE PRODUCT
   saveProduct(): void{
     if (this.editing && this.idEditing !== undefined) {
-      // WE ARE CURRENTLY EDITING
-      this.productService.updateProduct(this.idEditing, this.product).subscribe(data => {
-        this.getProducts();
-        this.resetProductForm();
+      this.productService.updateProduct(this.idEditing, this.product).subscribe({
+        next: () => { this.getProducts(); this.closeModal(); },
+        error: err => console.error(err)
       });
     } else {
-      // CREATE NEW PRODUCT
-      this.productService.addProduct(this.product).subscribe(data => {
-        this.getProducts();
-        this.resetProductForm();
+      this.productService.addProduct(this.product).subscribe({
+        next: () => { this.getProducts(); this.closeModal(); },
+        error: err => console.error(err)
       });
     }
   }
@@ -57,9 +62,10 @@ export class ProductsComponent implements OnInit {
     this.product = { ...product };
     this.editing = true;
     this.idEditing = product.id;
+    this.showModal = true;
   }
 
-  // DELET PRODUCT
+  // DELETE PRODUCT
   deleteProduct(id: number): void {
     this.productService.deleteProduct(id).subscribe(data => {
       this.getProducts();
