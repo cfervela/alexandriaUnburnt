@@ -14,9 +14,9 @@ import { Product } from '../../models/product';
 export class ProductsComponent implements OnInit {
 
   products = signal<Product[]>([]);
-  product: Product = { title: '', author: '', genre: '', publisher: '', price: 0, stock: 0, image: '', description: '' };
+  product: Product = { isbn: '', title: '', author: '', genre: '', publisher: '', price: 0, stock: 0, image: '', description: '' };
   editing: boolean = false;
-  idEditing: number | undefined = undefined;
+  idEditing: string | undefined = undefined;
   showModal: boolean = false;
 
   constructor(private productService: ProductService) {}
@@ -44,6 +44,7 @@ export class ProductsComponent implements OnInit {
 
   // UPDATE OR CREATE PRODUCT
   saveProduct(): void{
+    this.product.image = `https://covers.openlibrary.org/b/isbn/${this.product.isbn}-L.jpg`;
     if (this.editing && this.idEditing !== undefined) {
       this.productService.updateProduct(this.idEditing, this.product).subscribe({
         next: () => { this.getProducts(); this.closeModal(); },
@@ -61,21 +62,27 @@ export class ProductsComponent implements OnInit {
   edit(product: Product): void {
     this.product = { ...product };
     this.editing = true;
-    this.idEditing = product.id;
+    this.idEditing = product.isbn;
     this.showModal = true;
   }
 
   // DELETE PRODUCT
-  deleteProduct(id: number): void {
-    this.productService.deleteProduct(id).subscribe(data => {
-      this.getProducts();
+  deleteProduct(isbn: string): void {
+    this.productService.deleteProduct(isbn).subscribe({
+      next: () => this.getProducts(),
+      error: err => console.error('Delete failed:', err.error)
     });
   }
 
   // CLEAN PRODUCT FORM
   resetProductForm(): void {
-    this.product = { title: '', author: '', genre: '', publisher: '', price: 0, stock: 0, image: '', description: '' };
+    this.product = { isbn:'', title: '', author: '', genre: '', publisher: '', price: 0, stock: 0, image: '', description: '' };
     this.editing = false;
     this.idEditing = undefined;
+  }
+
+  getGenreClass(genre: string): string {
+    const slug = genre?.toLowerCase().replace(/[\s\/]+/g, '-') ?? 'default';
+    return `genre-${slug}`;
   }
 }

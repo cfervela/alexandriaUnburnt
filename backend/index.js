@@ -15,8 +15,8 @@ const db = mysql.createConnection({
 
 // CREATE
 app.post('/products', (req, res) => {
-    const { title, author, genre, publisher, price, stock, image, description } = req.body;
-    db.query('INSERT INTO products (title, author, genre, publisher, price, stock, image, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [title, author, genre, publisher, price, stock, image, description], (err, result) => {
+    const { isbn, title, author, genre, publisher, price, stock, image, description } = req.body;
+    db.query('INSERT INTO products (isbn, title, author, genre, publisher, price, stock, image, description) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)', [isbn,title, author, genre, publisher, price, stock, image, description], (err, result) => {
         if (err) return console.log(err);
         res.json(result);
     });
@@ -31,27 +31,27 @@ app.get('/products', (req, res) => {
 });
 
 //SINGLE PRODUCT
-app.get('/products/:id', (req, res) => {
-    db.query('SELECT * FROM products WHERE id = ?', [req.params.id], (err, result) => {
+app.get('/products/:isbn', (req, res) => {
+    db.query('SELECT * FROM products WHERE isbn = ?', [req.params.isbn], (err, result) => {
         if (err) return console.log(err);
         res.json(result);
     });
 });
 
 //UPDATE
-app.put('/products/:id', (req, res) => {
-    const { id } = req.params;
+app.put('/products/:isbn', (req, res) => {
+    const { isbn } = req.params;
     const { title, author, genre, publisher, price, stock, image, description } = req.body;
-    db.query('UPDATE products SET title = ?, author = ?, genre = ?, publisher = ?, price = ?, stock = ?, image = ?, description = ? WHERE id = ?', [title, author, genre, publisher, price, stock, image, description, id], (err, result) => {
+    db.query('UPDATE products SET title = ?, author = ?, genre = ?, publisher = ?, price = ?, stock = ?, image = ?, description = ? WHERE isbn = ?', [title, author, genre, publisher, price, stock, image, description, isbn], (err, result) => {
         if (err) return console.log(err);
         res.json(result);
     });
 });
 
 //DELETE
-app.delete('/products/:id', (req, res) => {
-    const { id } = req.params;
-    db.query('DELETE FROM products WHERE id = ?', [id], (err, result) => {
+app.delete('/products/:isbn', (req, res) => {
+    const { isbn } = req.params;
+    db.query('DELETE FROM products WHERE isbn = ?', [isbn], (err, result) => {
         if (err) return console.log(err);
         res.json(result);
     });
