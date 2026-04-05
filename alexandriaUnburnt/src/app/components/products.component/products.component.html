@@ -1,0 +1,81 @@
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">BOOKS</h2>
+
+  <!-- PRODUCT FORM -->
+  <form (ngSubmit)="saveProduct()" class="card p-4 shadow-sm mb-4">
+    <div class="row g-3">
+      <div class="col-md-5">
+        <input type="text" class="form-control" [(ngModel)]="product.title" name="title" placeholder="Book Title" required/>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" [(ngModel)]="product.author" name="author" placeholder="Book Author" required/>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" [(ngModel)]="product.genre" name="genre" placeholder="Book Genre" required/>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" [(ngModel)]="product.publisher" name="publisher" placeholder="Book Publisher" required/>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" [(ngModel)]="product.price" name="price" placeholder="$0.00" required/>
+      </div>
+      <div class="col-md-5">
+        <input type="number" class="form-control" [(ngModel)]="product.stock" name="stock" placeholder="0" required/>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" [(ngModel)]="product.image" name="image" placeholder="Book Cover" required/>
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" [(ngModel)]="product.description" name="description" placeholder="Book Synopsis" required/>
+      </div>
+
+      <div class="col-md-2 d-grid gap-2">
+        <button type="submit" class="btn btn-primary">
+          {{ editing ? 'Update' : 'Add' }}
+        </button>
+        <button class="btn btn-secondary" *ngIf="editing" (click)="resetProductForm()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-bordered table-hover shadow-sm">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Publisher</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Image</th>
+        <th>Description</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr  *ngFor="let p of products; let i = index">
+        <td>{{p.id}}</td>
+        <td>{{p.title}}</td>
+        <td>{{p.author}}</td>
+        <td>{{p.genre}}</td>
+        <td>{{p.publisher}}</td>
+        <td>{{p.price}}</td>
+        <td>{{p.stock}}</td>
+        <td>{{p.image}}</td>
+        <td>{{p.description}}</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-warning me-2" (click)="edit(p)">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteProduct(p.id!)">
+            <i class="bi bi-x-square"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
