@@ -14,8 +14,8 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: #0d6efd;
-  color: white;
+  background-color: #2B3349;
+  color: #F6724B ;
   border: none;
   font-size: 1.5rem;
   display: flex;
@@ -28,7 +28,8 @@
 }
 
 .fab-btn:hover {
-  background-color: #0b5ed7;
+  background-color: #F6724B;
+  color: #FDD0BB;
   transform: scale(1.1);
 }
 
