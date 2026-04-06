@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from './components/inicio.component/inicio.component';
 import { ProductsComponent } from './components/products.component/products.component';
+import {BookComponent} from './components/book.component/book.component';
 
 export const routes: Routes = [{
     path: '',
@@ -9,5 +10,10 @@ export const routes: Routes = [{
   {
     path: 'catalogo',
     component: ProductsComponent
+  },
+  {
+    path: 'catalogo/:isbn',
+    component: BookComponent,
+    runGuardsAndResolvers: 'always'
   }
 ];

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Product} from '../models/product';
-import {Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Product } from '../models/product';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -12,23 +13,25 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  // GET PRODUCTS
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiURL);
   }
 
-  // CREATE NEW PRODUCT
-  addProduct(product: Product): Observable<Product>{
+  getProduct(isbn: string): Observable<Product> {
+    return this.http.get<Product[]>(`${this.apiURL}/${isbn}`).pipe(
+      map(products => Array.isArray(products) ? products[0] : products)
+    );
+  }
+
+  addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.apiURL, product);
   }
 
-  // UPDATE EXISTING PRODUCT
-  updateProduct(isbn: string, product: Product): Observable<Product>{
+  updateProduct(isbn: string, product: Product): Observable<Product> {
     return this.http.put<Product>(`${this.apiURL}/${isbn}`, product);
   }
 
-  // DELETE EXISTING PRODUCT
-  deleteProduct (isbn: string): Observable<any>{
+  deleteProduct(isbn: string): Observable<any> {
     return this.http.delete(`${this.apiURL}/${isbn}`);
   }
 }

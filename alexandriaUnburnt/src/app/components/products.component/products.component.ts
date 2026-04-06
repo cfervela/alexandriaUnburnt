@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../models/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -19,7 +20,7 @@ export class ProductsComponent implements OnInit {
   idEditing: string | undefined = undefined;
   showModal: boolean = false;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit():void {
     this.getProducts();
@@ -44,6 +45,7 @@ export class ProductsComponent implements OnInit {
 
   // UPDATE OR CREATE PRODUCT
   saveProduct(): void{
+    this.product.isbn = this.product.isbn.trim();
     this.product.image = `https://covers.openlibrary.org/b/isbn/${this.product.isbn}-L.jpg`;
     if (this.editing && this.idEditing !== undefined) {
       this.productService.updateProduct(this.idEditing, this.product).subscribe({
@@ -84,5 +86,10 @@ export class ProductsComponent implements OnInit {
   getGenreClass(genre: string): string {
     const slug = genre?.toLowerCase().replace(/[\s\/]+/g, '-') ?? 'default';
     return `genre-${slug}`;
+  }
+
+  // BOOK DETAIL PAGE
+  bookDetailPage(isbn: string): void {
+    this.router.navigate(['/catalogo', isbn]);
   }
 }
