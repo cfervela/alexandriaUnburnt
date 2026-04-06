@@ -1,0 +1,59 @@
+#mainNavbar{
+  z-index: 99;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 10px 10px;
+  background: #2B3349;
+}
+
+.navbar-brand{
+  font-weight: bold;
+  font-size: 2em !important;
+  background-image: linear-gradient(
+    to right,
+    rgba(246, 114, 75, 1),
+    rgba(252, 138, 85, 1),
+    /* rgba(253, 208, 187, 1)*/
+    rgba(143, 78, 81, 1),
+    rgba(246, 114, 75, 1)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-size: 200% auto;
+  animation: gradientAnimation 3s linear infinite;
+}
+
+@keyframes gradientAnimation {
+  0%{
+    background-position: 200% 50%;
+  }
+  100%{
+    background-position: 0% 50%;
+  }
+}
+
+.navbar-text,
+.nav-link{
+  color: #F6724B !important;
+  font-weight: bold;
+}
+
+.nav-link:hover{
+  color: #FDD0BB !important;
+}
+
+.navbar-toggler {
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28217%2C 213%2C 196%2C 166%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c%2fsvg%3e");
+  border: none !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: #3d4a6b;
+    border-radius: 8px;
+    padding: 8px;
+    margin-top: 8px;
+  }
+}
