@@ -112,7 +112,24 @@ h1{
   z-index: 1000;
 }
 
-.cart:hover{
-  background-color: #F6724B;
+.cart:hover {
+  background-image: linear-gradient(
+    to right,
+    rgba(246, 114, 75, 1),
+    rgba(252, 138, 85, 1),
+    rgba(143, 78, 81, 1),
+    rgba(246, 114, 75, 1)
+  );
+  background-size: 200% auto;
+  animation: gradientAnimation 3s linear infinite;
   color: #FDD0BB;
+}
+
+@keyframes gradientAnimation {
+  0%{
+    background-position: 200% 50%;
+  }
+  100%{
+    background-position: 0% 50%;
+  }
 }
