@@ -3,9 +3,20 @@
     <i class="bi bi-plus-circle"></i>
   </button>
 
+  <!-- Filter buttons -->
+  <div class="genre-filters">
+    <button class="btn btn-genre all" (click)="selectedGenre.set('all')">All</button>
+    <button class="btn btn-genre classic ms-2" (click)="selectedGenre.set('Classic')">Classic</button>
+    <button class="btn btn-genre fantasy ms-2" (click)="selectedGenre.set('Fantasy')">Fantasy</button>
+    <button class="btn btn-genre contemporary ms-2" (click)="selectedGenre.set('Contemporary')">Contemporary</button>
+    <button class="btn btn-genre history ms-2" (click)="selectedGenre.set('History')">History</button>
+    <button class="btn btn-genre romance ms-2" (click)="selectedGenre.set('Romance')">Romance</button>
+    <button class="btn btn-genre ya ms-2" (click)="selectedGenre.set('YA')">YA</button>
+  </div>
+
   <!-- BOOKS GRID -->
   <div class="books-grid">
-    <div class="book-card" *ngFor="let p of products()">
+    <div class="book-card" *ngFor="let p of products() | imageFilter: selectedGenre()">
       <div class="book-cover">
         <img *ngIf="p.image && p.image !== 'STOCK'" [src]="p.image" [alt]="p.title" />
         <div *ngIf="!p.image || p.image === 'STOCK'" class="cover-placeholder">
