@@ -2,6 +2,30 @@
   margin-top: 5vh;
 }
 
+.book {
+  background-color: #97a3c2;
+  border-radius: 10px;
+  color: #2B3349;
+  padding: 2rem;
+  box-shadow: 0 8px 32px #3d4a6b;
+}
+
+.book img {
+  box-shadow: 0 8px 32px #2B3349 !important;
+  transition: transform 0.5s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+h1{
+  background-color: #c0c7da;
+  border-radius: 12px;
+  display: inline-block;
+  padding: 0 0.4rem;
+}
+
 .genre-classic {
   background: #fdf3e3;
   color: #b45309;
@@ -73,4 +97,22 @@
   background-color: #F6724B;
   color: #FDD0BB;
   transform: scale(1.1);
+}
+
+.cart{
+  background-color: #FDD0BB;
+  color: #F6724B ;
+  border: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.cart:hover{
+  background-color: #F6724B;
+  color: #FDD0BB;
 }

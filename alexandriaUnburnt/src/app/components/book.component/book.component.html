@@ -1,39 +1,45 @@
 <div class="container py-5">
+  <div class="book py-5 px-4">
 
-  @if (loading()) {
-    <p>Loading book details...</p>
-  }
+    @if (loading()) {
+      <p>Loading book details...</p>
+    }
 
-  @if (error()) {
-    <p class="text-danger">Failed to load book. Please try again.</p>
-  }
+    @if (error()) {
+      <p class="text-danger">Failed to load book. Please try again.</p>
+    }
 
-  @if (!loading() && product()) {
-    <div class="row g-4">
-      <div class="col-md-4 text-center">
-        <img
-          [src]="getImageUrl()"
-          [alt]="product()!.title"
-          (error)="onImageError($event)"
-          class="img-fluid rounded shadow"
-        />
+    @if (!loading() && product()) {
+      <div class="row g-4">
+        <div class="col-md-4 text-center">
+          <img
+            [src]="getImageUrl()"
+            [alt]="product()!.title"
+            (error)="onImageError($event)"
+            class="img-fluid rounded shadow"
+          />
+        </div>
+        <div class="col-md-8">
+          <h1 class="mb-1">{{ product()!.title }}</h1>
+          <h4 class="text-muted mb-3">{{ product()!.author }}</h4>
+          <span class="badge mb-3" [class]="'book-genre ' + getGenreClass(product()!.genre)">{{ product()!.genre }}</span>
+          <p class="mb-3">{{ product()!.description }}</p>
+          <hr/>
+          <p><strong>Publisher:</strong> {{ product()!.publisher }}</p>
+          <p><strong>ISBN:</strong> {{ product()!.isbn }}</p>
+          <p><strong>Price:</strong> ${{ product()!.price }}</p>
+          <p><strong>Stock:</strong> {{ product()!.stock }} available</p>
+          <button class="btn cart">
+            <i class="bi bi-plus-lg"></i>   Agregar al carrito
+          </button>
+        </div>
+
       </div>
-      <div class="col-md-8">
-        <h1 class="mb-1">{{ product()!.title }}</h1>
-        <h4 class="text-muted mb-3">{{ product()!.author }}</h4>
-        <span class="badge mb-3" [class]="'book-genre ' + getGenreClass(product()!.genre)">{{ product()!.genre }}</span>
-        <p class="mb-3">{{ product()!.description }}</p>
-        <hr/>
-        <p><strong>Publisher:</strong> {{ product()!.publisher }}</p>
-        <p><strong>ISBN:</strong> {{ product()!.isbn }}</p>
-        <p><strong>Price:</strong> ${{ product()!.price }}</p>
-        <p><strong>Stock:</strong> {{ product()!.stock }} available</p>
-      </div>
-    </div>
-  }
+    }
 
-  <button class="fab-btn" routerLink="/catalogo">
-    <i class="bi bi-arrow-left-circle"></i>
-  </button>
+    <button class="fab-btn" routerLink="/catalogo">
+      <i class="bi bi-arrow-left-circle"></i>
+    </button>
+  </div>
 
 </div>
