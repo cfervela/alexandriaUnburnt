@@ -124,29 +124,14 @@
   color: #6d28d9;
 }
 
-.genre-sci-fi {
-  background: #e0f2fe;
-  color: #0369a1;
-}
-
-.genre-contemporary {
+.genre-romance {
   background: #fce7f3;
   color: #be185d;
 }
 
-.genre-horror     {
-  background: #fee2e2;
-  color: #991b1b;
-}
-
-.genre-mystery {
-  background: #f1f5f9;
-  color: #334155;
-}
-
-.genre-thriller {
-  background: #fef9c3;
-  color: #854d0e;
+.genre-contemporary {
+  background: #e0e7ff;
+  color: #3730a3;
 }
 
 .genre-history {
@@ -154,12 +139,7 @@
   color: #065f46;
 }
 
-.genre-biography {
-  background: #e0e7ff;
-  color: #3730a3;
-}
-
-.genre-children {
+.genre-ya {
   background: #fef08a;
   color: #713f12;
 }
@@ -240,7 +220,7 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 3rem;
-  color: #aaa;
+  color: #2B3349;
   font-size: 1rem;
 }
 .empty-state i {
@@ -262,7 +242,7 @@
 }
 
 .modal-box {
-  background: #fff;
+  background: #97a3c2 !important;
   border-radius: 16px;
   width: 100%;
   max-width: 560px;
@@ -277,7 +257,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #2B3349;
 }
 
 .modal-header h5 {
@@ -291,12 +271,12 @@
   border: none;
   font-size: 1rem;
   cursor: pointer;
-  color: #888;
+  color: #2B3349;
   padding: 0.25rem;
 }
 
 .modal-close:hover {
-  color: #333;
+  color: #FC5574;
 }
 
 .modal-body {
@@ -308,7 +288,21 @@
   justify-content: flex-end;
   gap: 0.75rem;
   padding: 1rem 1.5rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #2B3349;
+}
+
+.addBtn{
+  background: #F6724B;
+  color: #FDD0BB;
+}
+
+.cancelBtn{
+  background: #FC5574;
+  color: #fdbbc7;
+}
+
+.addBtn:hover, .cancelBtn:hover{
+  opacity: 0.8;
 }
 
 /* ADD BOOK BUTTON */
@@ -333,4 +327,56 @@
   .books-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* FILTER BUTTONS */
+
+.genre-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.genre-filters .btn {
+  margin-left: 0 !important;
+}
+
+.btn-genre:hover{
+  opacity: 0.8;
+}
+
+.classic{
+  background: #fdf3e3;
+  color: #b45309;
+}
+
+.fantasy {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.romance {
+  background: #fce7f3;
+  color: #be185d;
+}
+
+.contemporary {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.history {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.ya {
+  background: #fef08a;
+  color: #713f12;
+}
+
+.all {
+  background: #e8f4fd;
+  color: #2979ff;
 }

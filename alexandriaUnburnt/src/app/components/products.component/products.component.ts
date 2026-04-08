@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
+import {ImageFilterPipe} from './shared/filter.pipe';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ImageFilterPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
@@ -25,6 +26,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit():void {
     this.getProducts();
   }
+
+  selectedGenre = signal<string>('all');
 
   openModal(): void {
     this.showModal = true;
