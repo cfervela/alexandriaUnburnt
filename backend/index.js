@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -7,16 +8,17 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'alexandria'
+  host: process.env.MARIADB_HOST || 'localhost',
+  port: Number(process.env.MARIADB_PORT || 3306),
+  user: process.env.MARIADB_USER,
+  password: process.env.MARIADB_PASSWORD,
+  database: process.env.MARIADB_DATABASE
 });
 
 // CREATE
 app.post('/products', (req, res) => {
     const { isbn, title, author, genre, publisher, price, stock, image, description } = req.body;
-    db.query('INSERT INTO products (isbn, title, author, genre, publisher, price, stock, image, description) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)', [isbn,title, author, genre, publisher, price, stock, image, description], (err, result) => {
+    db.query('INSERT INTO products (isbn, title, author, genre, publisher, price, stock, image, description) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)', [isbn, title, author, genre, publisher, price, stock, image, description], (err, result) => {
         if (err) return console.log(err);
         res.json(result);
     });

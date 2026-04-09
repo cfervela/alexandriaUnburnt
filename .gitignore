@@ -6,6 +6,9 @@ tmp/
 out-tsc/
 bazel-out/
 
+# Docker
+mariadb/
+
 # Node
 node_modules
 npm-debug.log
@@ -45,5 +48,4 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
-
-# Frontend
+.env
