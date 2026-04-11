@@ -1,0 +1,109 @@
+<div class="container-fluid pt-5 pb-5" style="margin-top: 80px; background-color: #c0c7da;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <div class="card shadow-lg border-3 border-dark rounded-4">
+          <div class="card-body p-5">
+            <!-- Header -->
+            <div class="text-center mb-5">
+              <h1 class="display-4 fw-bold text-dark mb-3">Contacto</h1>
+              <p class="lead text-muted">¿Tienes alguna pregunta? No dudes en comunicarte con nosotros</p>
+            </div>
+
+            <!-- Formulario -->
+            <form (ngSubmit)="enviarFormulario()">
+              <!-- Nombre -->
+              <div class="mb-4">
+                <label for="nombre" class="form-label fw-bold text-uppercase">Nombre *</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg border-2"
+                  id="nombre"
+                  [(ngModel)]="nombre"
+                  name="nombre"
+                  placeholder="Tu nombre completo"
+                  required
+                  [disabled]="cargando"
+                />
+              </div>
+
+              <!-- Email -->
+              <div class="mb-4">
+                <label for="email" class="form-label fw-bold text-uppercase">Email *</label>
+                <input
+                  type="email"
+                  class="form-control form-control-lg border-2"
+                  id="email"
+                  [(ngModel)]="email"
+                  name="email"
+                  placeholder="tu@email.com"
+                  required
+                  [disabled]="cargando"
+                />
+              </div>
+
+              <!-- Asunto -->
+              <div class="mb-4">
+                <label for="asunto" class="form-label fw-bold text-uppercase">Asunto *</label>
+                <input
+                  type="text"
+                  class="form-control form-control-lg border-2"
+                  id="asunto"
+                  [(ngModel)]="asunto"
+                  name="asunto"
+                  placeholder="Motivo de tu mensaje"
+                  required
+                  [disabled]="cargando"
+                />
+              </div>
+
+              <!-- Mensaje -->
+              <div class="mb-4">
+                <label for="mensaje" class="form-label fw-bold text-uppercase">Mensaje *</label>
+                <textarea
+                  class="form-control form-control-lg border-2"
+                  id="mensaje"
+                  [(ngModel)]="mensaje"
+                  name="mensaje"
+                  placeholder="Tu mensaje aquí..."
+                  rows="7"
+                  required
+                  [disabled]="cargando"
+                ></textarea>
+              </div>
+
+              <!-- Botones -->
+              <div class="d-grid gap-3 d-md-flex">
+                <button
+                  type="submit"
+                  class="btn btn-enviar btn-lg flex-fill fw-bold text-uppercase"
+                  [disabled]="cargando"
+                >
+                  {{ cargando ? 'Enviando...' : 'Enviar Mensaje' }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-limpiar btn-lg flex-fill fw-bold text-uppercase"
+                  (click)="limpiarFormulario()"
+                  [disabled]="cargando"
+                >
+                  Limpiar
+                </button>
+              </div>
+            </form>
+
+            <!-- Mensaje de confirmación -->
+            <div *ngIf="mensajeConfirmacion()" class="alert alert-success alert-dismissible fade show mt-4 mb-0" role="alert">
+              <strong>{{ mensajeConfirmacion() }}</strong>
+            </div>
+
+            <!-- Mensaje de error -->
+            <div *ngIf="mensajeError()" class="alert alert-danger alert-dismissible fade show mt-4 mb-0" role="alert">
+              <strong>{{ mensajeError() }}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+/* Colores del proyecto - Variables CSS */
+:host {
+  --color-azul-oscuro: #2B3349;
+  --color-naranja: #F6724B;
+  --color-naranja-claro: #FDD0BB;
+  --color-gris-azulado-1: #c0c7da;
+  --color-gris-azulado-2: #97a3c2;
+}
+
+/* Card personalizado - Combina con la paleta del proyecto */
+.card {
+  background-color: #f0f4f9 !important;
+  border-color: var(--color-gris-azulado-1) !important;
+  border-radius: 1.5rem;
+}
+
+/* Botón Enviar - Gradient personalizado */
+.btn-enviar {
+  background: linear-gradient(135deg, var(--color-naranja) 0%, #ff5a2f 100%);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(246, 114, 75, 0.3);
+}
+
+.btn-enviar:hover:not([disabled]) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(246, 114, 75, 0.4);
+}
+
+.btn-enviar:active:not([disabled]) {
+  transform: translateY(0);
+}
+
+.btn-enviar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Botón Limpiar - Estilos personalizados */
+.btn-limpiar {
+  background-color: var(--color-gris-azulado-1);
+  color: var(--color-azul-oscuro);
+  border: 2px solid var(--color-gris-azulado-1);
+  transition: all 0.3s ease;
+}
+
+.btn-limpiar:hover:not([disabled]) {
+  background-color: var(--color-gris-azulado-2);
+  border-color: var(--color-gris-azulado-2);
+  color: var(--color-azul-oscuro);
+}
+
+.btn-limpiar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Estilos de inputs y focus */
+.form-control {
+  border-color: #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--color-naranja);
+  box-shadow: 0 0 0 0.2rem rgba(246, 114, 75, 0.25);
+}
+
+.form-control:disabled {
+  background-color: #e9ecef;
+  opacity: 0.65;
+}
+
+.form-control-lg {
+  min-height: calc(1.5em + 1rem + 2px);
+  padding: 0.75rem 1rem;
+  font-size: 1.125rem;
+  border-radius: 0.5rem;
+}
+
+/* Animación para mensajes */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert {
+  animation: slideIn 0.3s ease-out;
+  border-radius: 0.5rem;
+}
