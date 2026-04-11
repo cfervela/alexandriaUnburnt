@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const productRoutes = require('./routes/productRoutes');
+const contactoRoutes = require('./routes/contactoRoutes');
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 
 // Routes
 app.use(productRoutes);
+app.use(contactoRoutes);
 
 // Server
 app.listen(3000, () => {
