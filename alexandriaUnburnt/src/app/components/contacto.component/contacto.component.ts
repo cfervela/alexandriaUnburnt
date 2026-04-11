@@ -1,57 +1,45 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactoService } from '../../service/contacto.service';
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './contacto.component.html',
   styleUrls: ['./contacto.component.css']
 })
-export class ContactoComponent {
-  nombre: string = '';
-  email: string = '';
-  asunto: string = '';
-  mensaje: string = '';
+export class ContactoComponent implements OnInit {
+  form: FormGroup;
   cargando: boolean = false;
 
   mensajeConfirmacion = signal<string>('');
   mensajeError = signal<string>('');
 
-  constructor(private contactoService: ContactoService) {}
+  constructor(private contactoService: ContactoService, private fb: FormBuilder) {
+    this.form = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      asunto: ['', [Validators.required, Validators.minLength(5)]],
+      mensaje: ['', [Validators.required, Validators.minLength(10)]]
+    });
+  }
+
+  ngOnInit(): void {}
 
   enviarFormulario() {
-    // Validaciones
-    if (!this.nombre.trim()) {
-      this.mostrarError('Por favor ingresa tu nombre');
-      return;
-    }
-    if (!this.email.trim()) {
-      this.mostrarError('Por favor ingresa tu email');
-      return;
-    }
-    if (!this.validarEmail(this.email)) {
-      this.mostrarError('Por favor ingresa un email válido');
-      return;
-    }
-    if (!this.asunto.trim()) {
-      this.mostrarError('Por favor ingresa un asunto');
-      return;
-    }
-    if (!this.mensaje.trim()) {
-      this.mostrarError('Por favor ingresa un mensaje');
+    if (!this.form.valid) {
+      this.mostrarError('Por favor completa todos los campos correctamente');
       return;
     }
 
-    // Enviar al backend
     this.cargando = true;
     const datos = {
-      nombre: this.nombre,
-      correo: this.email,
-      asunto: this.asunto,
-      mensaje: this.mensaje
+      nombre: this.form.get('nombre')?.value,
+      correo: this.form.get('email')?.value,
+      asunto: this.form.get('asunto')?.value,
+      mensaje: this.form.get('mensaje')?.value
     };
 
     this.contactoService.enviarMensaje(datos).subscribe({
@@ -74,15 +62,7 @@ export class ContactoComponent {
   }
 
   limpiarFormulario() {
-    this.nombre = '';
-    this.email = '';
-    this.asunto = '';
-    this.mensaje = '';
-  }
-
-  validarEmail(email: string): boolean {
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regexEmail.test(email);
+    this.form.reset();
   }
 
   private mostrarError(mensaje: string) {
