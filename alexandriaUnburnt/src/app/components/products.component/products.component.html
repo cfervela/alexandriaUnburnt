@@ -5,13 +5,13 @@
 
   <!-- Filter buttons -->
   <div class="genre-filters">
-    <button class="btn btn-genre all" (click)="selectedGenre.set('all')">All</button>
-    <button class="btn btn-genre classic ms-2" (click)="selectedGenre.set('Classic')">Classic</button>
-    <button class="btn btn-genre fantasy ms-2" (click)="selectedGenre.set('Fantasy')">Fantasy</button>
-    <button class="btn btn-genre contemporary ms-2" (click)="selectedGenre.set('Contemporary')">Contemporary</button>
-    <button class="btn btn-genre history ms-2" (click)="selectedGenre.set('History')">History</button>
-    <button class="btn btn-genre romance ms-2" (click)="selectedGenre.set('Romance')">Romance</button>
-    <button class="btn btn-genre ya ms-2" (click)="selectedGenre.set('YA')">YA</button>
+    <button class="btn btn-genre all" (click)="filterByGenre('all')">All</button>
+    <button class="btn btn-genre classic ms-2" (click)="filterByGenre('Classic')">Classic</button>
+    <button class="btn btn-genre fantasy ms-2" (click)="filterByGenre('Fantasy')">Fantasy</button>
+    <button class="btn btn-genre contemporary ms-2" (click)="filterByGenre('Contemporary')">Contemporary</button>
+    <button class="btn btn-genre history ms-2" (click)="filterByGenre('History')">History</button>
+    <button class="btn btn-genre romance ms-2" (click)="filterByGenre('Romance')">Romance</button>
+    <button class="btn btn-genre ya ms-2" (click)="filterByGenre('YA')">YA</button>
   </div>
 
   <!-- BOOKS GRID -->

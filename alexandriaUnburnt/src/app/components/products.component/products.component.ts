@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../models/product';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {ImageFilterPipe} from './shared/filter.pipe';
 
 @Component({
@@ -21,10 +21,16 @@ export class ProductsComponent implements OnInit {
   idEditing: string | undefined = undefined;
   showModal: boolean = false;
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit():void {
     this.getProducts();
+    // Leer el parámetro de categoría de la URL
+    this.route.queryParams.subscribe(params => {
+      if (params['category']) {
+        this.selectedGenre.set(params['category']);
+      }
+    });
   }
 
   selectedGenre = signal<string>('all');
@@ -94,5 +100,15 @@ export class ProductsComponent implements OnInit {
   // BOOK DETAIL PAGE
   bookDetailPage(isbn: string): void {
     this.router.navigate(['/catalogo', isbn]);
+  }
+
+  // FILTER BY GENRE AND UPDATE URL
+  filterByGenre(genre: string): void {
+    this.selectedGenre.set(genre);
+    if (genre === 'all') {
+      this.router.navigate(['/catalogo']);
+    } else {
+      this.router.navigate(['/catalogo'], { queryParams: { category: genre } });
+    }
   }
 }
