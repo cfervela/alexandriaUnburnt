@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const productRoutes = require('./routes/productRoutes');
 const contactoRoutes = require('./routes/contactoRoutes');
+const ventasRoutes = require('./routes/ventasRoutes');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 // Routes
 app.use(productRoutes);
 app.use(contactoRoutes);
+app.use(ventasRoutes);
 
 // Server
 app.listen(3000, () => {
