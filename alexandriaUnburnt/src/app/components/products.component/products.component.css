@@ -329,6 +329,26 @@
   }
 }
 
+@media (max-width: 575px) {
+  .books-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .fab-btn {
+    bottom: 1rem;
+    right: 1rem;
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+
+  .modal-box {
+    margin: 0 1rem;
+    width: calc(100% - 2rem);
+  }
+}
+
 /* FILTER BUTTONS */
 
 .genre-filters {

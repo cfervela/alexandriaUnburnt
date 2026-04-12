@@ -14,14 +14,19 @@ import {ImageFilterPipe} from './shared/filter.pipe';
   styleUrl: './products.component.css',
 })
 export class ProductsComponent implements OnInit {
+  private readonly EMPTY_PRODUCT: Product = { isbn: '', title: '', author: '', genre: '', publisher: '', price: 0, stock: 0, image: '', description: '' };
 
   products = signal<Product[]>([]);
-  product: Product = { isbn: '', title: '', author: '', genre: '', publisher: '', price: 0, stock: 0, image: '', description: '' };
+  product: Product = { ...this.EMPTY_PRODUCT };
   editing: boolean = false;
   idEditing: string | undefined = undefined;
   showModal: boolean = false;
 
-  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit():void {
     this.getProducts();
@@ -87,7 +92,7 @@ export class ProductsComponent implements OnInit {
 
   // CLEAN PRODUCT FORM
   resetProductForm(): void {
-    this.product = { isbn:'', title: '', author: '', genre: '', publisher: '', price: 0, stock: 0, image: '', description: '' };
+    this.product = { ...this.EMPTY_PRODUCT };
     this.editing = false;
     this.idEditing = undefined;
   }
