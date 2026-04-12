@@ -189,13 +189,17 @@ export class CartService {
       quantity: item.quantity
     }));
 
+    console.log('Iniciando procesarPago con items:', ventaData);
+
     // Llamar al backend para procesar la venta
-    return this.http.post('http://localhost:3000/api/ventas', { items: ventaData }).pipe(
+    return this.http.post('http://localhost:3000/ventas', { items: ventaData }).pipe(
       tap((response: any) => {
+        console.log('Respuesta éxito:', response);
         // Si es exitoso, limpiar el carrito
         this.clearCart();
       }),
       catchError((error) => {
+        console.log('Error en solicitud:', error);
         const errorMessage = error.error?.message || 'Error al procesar el pago';
         return of({ success: false, message: errorMessage });
       })
