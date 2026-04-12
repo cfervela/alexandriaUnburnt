@@ -1,0 +1,403 @@
+:root {
+  --primary-color: #2B3349;
+  --secondary-color: #F6724B;
+  --accent-light: #FDD0BB;
+  --text-light: #c0c7da;
+  --text-lighter: #97a3c2;
+}
+
+.carrito-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+  min-height: 70vh;
+  margin-top: 5rem;
+}
+
+.carrito-titulo {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Mensaje de pago */
+.mensaje-pago {
+  padding: 1.2rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  animation: slideInDown 0.5s ease-out;
+  text-align: center;
+}
+
+.mensaje-pago.exito {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border-left: 4px solid #155724;
+}
+
+.mensaje-pago.error {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+  color: white;
+  border-left: 4px solid #c3102b;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Carrito vacío */
+.carrito-vacio {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, rgba(245, 247, 250, 0.5), rgba(253, 208, 187, 0.1));
+  border-radius: 12px;
+  border: 2px dashed var(--secondary-color);
+}
+
+.texto-vacio {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.texto-secundario {
+  color: var(--text-lighter);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Contenido del carrito */
+.carrito-contenido {
+  animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tabla de items */
+.table-responsive {
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(43, 51, 73, 0.1);
+}
+
+.tabla-carrito {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.tabla-carrito thead {
+  background: linear-gradient(135deg, var(--primary-color), #3a4556);
+  color: white;
+  font-weight: 600;
+}
+
+.tabla-carrito th {
+  padding: 1.2rem;
+  text-align: left;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tabla-carrito tbody tr {
+  border-bottom: 1px solid #e8eaf0;
+  transition: background-color 0.3s ease;
+}
+
+.tabla-carrito tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.tabla-carrito td {
+  padding: 1.2rem;
+  vertical-align: middle;
+}
+
+.nombre-libro {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.texto-muted {
+  color: var(--text-lighter);
+  font-size: 0.85rem;
+}
+
+.precio-unitario,
+.subtotal,
+.cantidad-item {
+  text-align: center;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Input de cantidad */
+.input-cantidad {
+  width: 70px;
+  padding: 0.5rem;
+  border: 2px solid var(--text-light);
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  color: var(--primary-color);
+  transition: border-color 0.3s ease;
+}
+
+.input-cantidad:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 3px rgba(246, 114, 75, 0.1);
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-eliminar:hover {
+  background-color: rgba(246, 114, 75, 0.1);
+  transform: scale(1.15);
+}
+
+/* Resumen del carrito */
+.resumen-carrito {
+  background: linear-gradient(135deg, var(--primary-color), #3a4556);
+  color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 16px rgba(43, 51, 73, 0.2);
+}
+
+.resumen-contenido {
+  max-width: 400px;
+  margin-left: auto;
+}
+
+.linea-resumen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.linea-resumen.total {
+  border-bottom: none;
+  border-top: 2px solid var(--secondary-color);
+  padding-top: 1rem;
+  margin-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.valor {
+  font-weight: 600;
+  color: var(--accent-light);
+}
+
+.valor-total {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+
+.cantidad-items {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.95rem;
+  color: var(--accent-light);
+}
+
+/* Botones de acción */
+.botones-accion {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #f55e36;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(246, 114, 75, 0.3);
+}
+
+.btn-secondary {
+  background: var(--text-light);
+  color: var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background: #a8b2cc;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.8rem 2.5rem;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(40, 167, 69, 0.3);
+}
+
+.btn-success:disabled {
+  background: #c0c7da;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .carrito-titulo {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tabla-carrito th,
+  .tabla-carrito td {
+    padding: 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .tabla-carrito th {
+    font-size: 0.75rem;
+  }
+
+  .input-cantidad {
+    width: 60px;
+    font-size: 0.9rem;
+  }
+
+  .resumen-contenido {
+    max-width: 100%;
+  }
+
+  .botones-accion {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .nombre-libro {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carrito-container {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .carrito-titulo {
+    font-size: 1.5rem;
+  }
+
+  .tabla-carrito th,
+  .tabla-carrito td {
+    padding: 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .tabla-carrito th {
+    font-size: 0.65rem;
+  }
+
+  .precio-unitario,
+  .subtotal,
+  .cantidad-item {
+    font-size: 0.8rem;
+  }
+
+  .input-cantidad {
+    width: 50px;
+    padding: 0.4rem;
+    font-size: 0.8rem;
+  }
+
+  .btn-eliminar {
+    font-size: 1rem;
+  }
+
+  .resumen-carrito {
+    padding: 1.5rem;
+  }
+
+  .linea-resumen {
+    font-size: 0.9rem;
+    padding: 0.6rem 0;
+  }
+
+  .linea-resumen.total {
+    font-size: 1.1rem;
+  }
+
+  .valor-total {
+    font-size: 1.2rem;
+  }
+}

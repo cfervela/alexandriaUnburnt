@@ -1,0 +1,127 @@
+<div class="carrito-container">
+  <h1 class="carrito-titulo">Mi Carrito de Compras</h1>
+
+  <!-- Mensaje de estado del pago -->
+  <div *ngIf="mensajePago()" [class]="'mensaje-pago ' + tipoPago()">
+    {{ mensajePago() }}
+  </div>
+
+  <div *ngIf="cartItems.length === 0" class="carrito-vacio">
+    <p class="texto-vacio">Tu carrito está vacío</p>
+    <p class="texto-secundario">Agregá libros para comenzar tu compra</p>
+    <a routerLink="/catalogo" class="btn btn-primary mt-3">
+      Continuar comprando
+    </a>
+  </div>
+
+  <div *ngIf="cartItems.length > 0" class="carrito-contenido">
+    <!-- Tabla de items -->
+    <div class="table-responsive">
+      <table class="tabla-carrito">
+        <thead>
+          <tr>
+            <th>Libro</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems" class="item-carrito">
+            <!-- Nombre del libro con interpolación -->
+            <td class="nombre-libro">
+              <strong>{{ item.product.title }}</strong>
+              <br />
+              <small class="texto-muted">{{ item.product.author }}</small>
+            </td>
+
+            <!-- Precio unitario con interpolación y currency pipe -->
+            <td class="precio-unitario">
+              ${{ item.product.price | number: '1.2-2' }}
+            </td>
+
+            <!-- Cantidad editable -->
+            <td class="cantidad-item">
+              <input
+                type="number"
+                min="1"
+                [max]="item.product.stock"
+                [(ngModel)]="item.quantity"
+                (change)="cambiarCantidad(item.product.isbn, item.quantity)"
+                class="input-cantidad"
+              />
+            </td>
+
+            <!-- Subtotal con interpolación -->
+            <td class="subtotal">
+              ${{ getSubtotal(item) | number: '1.2-2' }}
+            </td>
+
+            <!-- Botón eliminar -->
+            <td class="accion-eliminar">
+              <button
+                class="btn-eliminar"
+                (click)="eliminarDelCarrito(item.product.isbn)"
+                title="Eliminar del carrito"
+              >
+                ❌
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Resumen del carrito -->
+    <div class="resumen-carrito">
+      <div class="resumen-contenido">
+        <div class="linea-resumen">
+          <span>Subtotal:</span>
+          <!-- Interpolación del total con pipe currency -->
+          <span class="valor">${{ cartTotal | number: '1.2-2' }}</span>
+        </div>
+
+        <div class="linea-resumen">
+          <span>Envío:</span>
+          <span class="valor">Gratis</span>
+        </div>
+
+        <div class="linea-resumen total">
+          <span>Total a pagar:</span>
+          <!-- Interpolación clara del total final -->
+          <span class="valor-total">${{ cartTotal | number: '1.2-2' }}</span>
+        </div>
+
+        <div class="cantidad-items">
+          Total de items: {{ cartItems.reduce((total, item) => total + item.quantity, 0) }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="botones-accion">
+      <button
+        class="btn btn-secondary"
+        routerLink="/catalogo"
+      >
+        ← Continuar comprando
+      </button>
+
+      <button
+        class="btn btn-danger"
+        (click)="vaciarCarrito()"
+      >
+        Vaciar carrito
+      </button>
+
+      <button
+        class="btn btn-success"
+        [disabled]="cartItems.length === 0 || procesandoPago()"
+        (click)="procesarPago()"
+      >
+        {{ procesandoPago() ? 'Procesando...' : 'Proceder al pago' }}
+      </button>
+    </div>
+  </div>
+</div>
