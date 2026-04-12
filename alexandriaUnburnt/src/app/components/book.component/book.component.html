@@ -1,4 +1,9 @@
 <div class="container py-5">
+  <!-- Mensaje de confirmación de agregado al carrito -->
+  <div *ngIf="mensajeAgreado()" class="mensaje-agregado">
+    {{ mensajeAgreado() }}
+  </div>
+
   <div class="book py-5 px-4">
 
     @if (loading()) {
@@ -29,7 +34,7 @@
           <p><strong>ISBN:</strong> {{ product()!.isbn }}</p>
           <p><strong>Price:</strong> ${{ product()!.price }}</p>
           <p><strong>Stock:</strong> {{ product()!.stock }} available</p>
-          <button class="btn cart">
+          <button class="btn cart" (click)="agregarAlCarrito()">
             <i class="bi bi-plus-lg" style="margin-right: 10px"></i> Agregar al carrito
           </button>
         </div>
