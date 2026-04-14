@@ -5,26 +5,6 @@ const crearMensaje = async (req, res) => {
   try {
     const { nombre, correo, asunto, mensaje } = req.body;
 
-    // Validaciones
-    if (!nombre || nombre.trim() === '') {
-      return res.status(400).json({ error: 'El nombre es requerido' });
-    }
-    if (!correo || correo.trim() === '') {
-      return res.status(400).json({ error: 'El correo es requerido' });
-    }
-    if (!asunto || asunto.trim() === '') {
-      return res.status(400).json({ error: 'El asunto es requerido' });
-    }
-    if (!mensaje || mensaje.trim() === '') {
-      return res.status(400).json({ error: 'El mensaje es requerido' });
-    }
-
-    // Validar formato de email
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regexEmail.test(correo)) {
-      return res.status(400).json({ error: 'El correo no es válido' });
-    }
-
     // Guardar en BD
     const result = await contactoService.guardarMensaje(nombre, correo, asunto, mensaje);
 

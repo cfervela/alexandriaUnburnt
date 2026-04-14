@@ -4,6 +4,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../../models/product';
 import { CartService } from '../../service/cart.service';
+import { API_BASE_URL } from '../../config/api.config';
 
 @Component({
   selector: 'app-book',
@@ -27,19 +28,16 @@ export class BookComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit fired');
 
     this.route.paramMap.subscribe(params => {
       const isbn = params.get('isbn') ?? '';
-      console.log('ISBN:', isbn);
 
       this.loading.set(true);
       this.product.set(undefined);
       this.error.set(false);
 
-      this.http.get<any>(`http://localhost:3000/products/${isbn}`).subscribe({
+      this.http.get<any>(`${API_BASE_URL}/products/${isbn}`).subscribe({
         next: data => {
-          console.log('Response:', data);
           this.product.set(Array.isArray(data) ? data[0] : data);
           this.loading.set(false);
         },

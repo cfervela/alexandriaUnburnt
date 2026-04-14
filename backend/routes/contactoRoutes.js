@@ -1,12 +1,13 @@
 const express = require('express');
 const contactoController = require('../controllers/contactoController');
+const { validarCrearMensaje } = require('../middlewares/validarContactoMiddleware');
 
 const router = express.Router();
 
 // Crear/enviar un nuevo mensaje
-router.post('/contacto', contactoController.crearMensaje);
+router.post('/contacto', validarCrearMensaje, contactoController.crearMensaje);
 
-// Obtener todos los mensajes (opcional - para admin)
+// Obtener todos los mensajes
 router.get('/contacto', contactoController.obtenerMensajes);
 
 // Obtener un mensaje específico

@@ -91,20 +91,16 @@ export class CarritoComponent implements OnInit {
    * Procesar el pago y actualizar stock
    */
   procesarPago(): void {
-    console.log('procesarPago() llamado');
 
     if (this.cartItems.length === 0) {
-      console.log('Carrito vacío');
       this.mostrarMensajePago('El carrito está vacío', 'error');
       return;
     }
 
-    console.log('Iniciando pago con items:', this.cartItems);
     this.procesandoPago.set(true);
 
     this.cartService.procesarPago().subscribe({
       next: (response: any) => {
-        console.log('Respuesta recibida:', response);
         if (response.success) {
           this.mostrarMensajePago('¡Pago procesado exitosamente! Stock actualizado.', 'exito');
           this.actualizarCarrito();

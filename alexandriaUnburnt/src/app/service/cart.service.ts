@@ -4,6 +4,7 @@ import { CartItem } from '../models/cart-item';
 import { Product } from '../models/product';
 import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { API_BASE_URL } from '../config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -36,11 +37,7 @@ export class CartService {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       if (stored) {
         const data = JSON.parse(stored);
-        const items = data.map((item: any) => {
-          const product = new Product();
-          Object.assign(product, item.product);
-          return new CartItem(product, item.quantity);
-        });
+        const items = data.map((item: any) => new CartItem(item.product as Product, item.quantity));
         this.cartItems.set(items);
       }
     } catch (error) {
@@ -189,12 +186,9 @@ export class CartService {
       quantity: item.quantity
     }));
 
-    console.log('Iniciando procesarPago con items:', ventaData);
-
     // Llamar al backend para procesar la venta
-    return this.http.post('http://localhost:3000/ventas', { items: ventaData }).pipe(
+    return this.http.post(`${API_BASE_URL}/ventas`, { items: ventaData }).pipe(
       tap((response: any) => {
-        console.log('Respuesta éxito:', response);
         // Si es exitoso, limpiar el carrito
         this.clearCart();
       }),

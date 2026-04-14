@@ -6,11 +6,15 @@ const {
   updateProductHandler,
   deleteProductHandler,
 } = require('../controllers/productController');
+const {
+  validarCrearProducto,
+  validarActualizarProducto,
+} = require('../middlewares/validarProductoMiddleware');
 
 const router = express.Router();
 
 // CREATE - POST /products
-router.post('/products', createProductHandler);
+router.post('/products', validarCrearProducto, createProductHandler);
 
 // READ - GET /products
 router.get('/products', getAllProductsHandler);
@@ -19,7 +23,7 @@ router.get('/products', getAllProductsHandler);
 router.get('/products/:isbn', getProductByIsbnHandler);
 
 // UPDATE - PUT /products/:isbn
-router.put('/products/:isbn', updateProductHandler);
+router.put('/products/:isbn', validarActualizarProducto, updateProductHandler);
 
 // DELETE - DELETE /products/:isbn
 router.delete('/products/:isbn', deleteProductHandler);

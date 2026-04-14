@@ -4,14 +4,6 @@ exports.procesarVenta = async (req, res) => {
   try {
     const { items } = req.body;
 
-    // Validación básica
-    if (!items || !Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: 'Carrito vacío o inválido'
-      });
-    }
-
     // Procesar la venta (actualizar stock)
     const resultado = await ventasService.procesarVenta(items);
 
