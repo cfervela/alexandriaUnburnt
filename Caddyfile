@@ -1,5 +1,5 @@
 # Dominio público donde exponemos el backend
-alegria-home.duckdns.org {
+alegria-home-dev.duckdns.org {
     # Proxy inverso hacia el backend Node.js en puerto 3000
     reverse_proxy backend:3000
 

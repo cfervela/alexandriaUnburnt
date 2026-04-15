@@ -8,7 +8,7 @@ const app = express();
 
 const allowedOrigins = [
   'https://cfervela.github.io',
-  'https://alegria-home.duckdns.org',
+  'https://alegria-home-dev.duckdns.org',
   'http://localhost:4200',
   'http://localhost:8081',
   'http://127.0.0.1:8081',
