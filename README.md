@@ -30,6 +30,33 @@ cd backend
 npm run dev
 ```
 
+## How to test the production build before deploying
+
+Before publishing to GitHub Pages, you can validate the final `dist` locally:
+
+1. Build the frontend for Pages:
+
+```bash
+cd alexandriaUnburnt
+npm run build:pages
+```
+
+2. Prepare the local preview folder in the project root:
+
+```bash
+npm run preview:pages
+```
+
+This will give you the port you need to use.
+
+3. Open the app in the browser:
+
+```text
+http://localhost:8081/alexandriaUnburnt/
+```
+
+Check if that's the correct port.
+
 ## Important note about volumes
 
 The database uses persistent data in a volume (mapped to the `mariadb/` folder).

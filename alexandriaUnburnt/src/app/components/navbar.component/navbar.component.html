@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-lg rounded-bottom-3 fixed-top mb-4" id="mainNavbar">
   <div class="container-fluid">
-    <a href="/" class="navbar-brand">{{ title }}</a>
+    <a [routerLink]="['/']" class="navbar-brand">{{ title }}</a>
     <button id="menu" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/catalogo">Catálogo</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="['/catalogo']">Catálogo</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link carrito-link" href="/carrito">
+          <a class="nav-link carrito-link" [routerLink]="['/carrito']">
             Carrito
             <span class="carrito-badge" *ngIf="cartService.cartItemCount() > 0">
               {{ cartService.cartItemCount() }}
@@ -18,7 +18,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contacto">Contacto</a>
+          <a class="nav-link" [routerLink]="['/contacto']">Contacto</a>
         </li>
       </ul>
     </div>
