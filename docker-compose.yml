@@ -9,21 +9,62 @@ services:
       - "${MARIADB_PORT}:3306"
     volumes:
       - ./mariadb:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    networks:
+      - alexandria
 
   phpmyadmin:
     image: phpmyadmin:5-apache
     container_name: phpmyadmin
     restart: unless-stopped
     depends_on:
-      mariadb:
-        condition: service_healthy
+      - mariadb
     environment:
       PMA_HOST: mariadb
       PMA_PORT: 3306
+    networks:
+      - alexandria
     ports:
       - "${PHPMYADMIN_PORT}:80"
+
+  backend:
+    build: ./backend
+    container_name: backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DB_HOST: mariadb
+      DB_USER: ${MARIADB_USER}
+      DB_PASSWORD: ${MARIADB_PASSWORD}
+      DB_NAME: ${MARIADB_DATABASE}
+      PORT: 3000
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - mariadb
+    networks:
+      - alexandria
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - backend
+    networks:
+      - alexandria
+
+networks:
+  alexandria:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

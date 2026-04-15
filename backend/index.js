@@ -6,16 +6,33 @@ const ventasRoutes = require('./routes/ventasRoutes');
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+const allowedOrigins = [
+  'https://alegria-home.github.io',
+  'https://alegria-home.duckdns.org',
+  'http://localhost:4200',
+  'http://localhost:8081',
+  'http://127.0.0.1:8081',
+];
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
+
 app.use(express.json());
 
-// Routes
 app.use(productRoutes);
 app.use(contactoRoutes);
 app.use(ventasRoutes);
 
-// Server
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });

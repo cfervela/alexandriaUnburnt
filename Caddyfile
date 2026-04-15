@@ -1,0 +1,22 @@
+# Dominio público donde exponemos el backend
+alegria-home.duckdns.org {
+    # Proxy inverso hacia el backend Node.js en puerto 3000
+    reverse_proxy backend:3000
+
+    # Headers de seguridad
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Frame-Options "SAMEORIGIN"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    # Compresión
+    encode zstd gzip
+
+    # Log
+    log {
+        output stdout
+    }
+}
+
