@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build:pages": "ng build --configuration production --base-href /alexandriaUnburnt/",
+    "preview:pages": "rm -rf .gh-pages-preview && mkdir -p .gh-pages-preview/alexandriaUnburnt && cp -R dist/alexandriaUnburnt/browser/* .gh-pages-preview/alexandriaUnburnt/ && npx http-server .gh-pages-preview",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
