@@ -7,7 +7,7 @@ const ventasRoutes = require('./routes/ventasRoutes');
 const app = express();
 
 const allowedOrigins = [
-  'https://alegria-home.github.io',
+  'https://cfervela.github.io',
   'https://alegria-home.duckdns.org',
   'http://localhost:4200',
   'http://localhost:8081',
